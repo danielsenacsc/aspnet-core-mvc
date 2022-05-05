@@ -1,6 +1,4 @@
-using System;
-
-namespace Capitulo01.Models
+namespace IES.Models
 {
     public class ErrorViewModel
     {

@@ -1,8 +1,8 @@
-﻿using Capitulo01.Models;
+﻿using IES.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Capitulo01.Controllers
+namespace IES.Controllers
 {
     public class HomeController : Controller
     {
