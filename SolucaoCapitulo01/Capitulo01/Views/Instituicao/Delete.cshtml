@@ -1,0 +1,48 @@
+﻿@model Capitulo01.Models.Instituicao
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Excluir</title>
+</head>
+<body>
+
+<h3>Você tem certeza que deseja excluir essa instituição?</h3>
+<div>
+    <h4>Instituição</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InstituicaoID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InstituicaoID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="InstituicaoID" />
+        <input type="submit" value="Excluir" class="btn btn-default" /> |
+        <a asp-action="Index">Voltar para lista</a>
+    </form>
+</div>
+</body>
+</html>
