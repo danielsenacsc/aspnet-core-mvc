@@ -1,6 +1,7 @@
 ﻿using IES.Data;
 using IES.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -19,17 +20,25 @@ namespace IES.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamentos.OrderBy(d => d.Nome).ToListAsync());
+            return View(await _context.Departamentos
+                .Include(i => i.Instituicao).OrderBy(d => d.Nome).ToListAsync());
         }
 
         public IActionResult Create()
         {
+            var instituicoes = _context.Instituicoes.OrderBy(i => i.Nome).ToList();
+            instituicoes.Insert(0, new Instituicao()
+            {
+                InstituicaoID = 0,
+                Nome = "Selecione a instituição"
+            });
+            ViewBag.Instituicoes = instituicoes;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Nome, InstituicaoID")] Departamento departamento)
         {
             try
             {
@@ -55,19 +64,23 @@ namespace IES.Controllers
                 return BadRequest();
             }
 
-            var departamento = await _context.Departamentos.SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            var departamento = await _context.Departamentos
+                .SingleOrDefaultAsync(d => d.DepartamentoID == id);
 
             if (departamento == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Instituicoes = new SelectList(_context.Instituicoes.OrderBy(b => b.Nome),
+                "InstituicaoID", "Nome", departamento.InstituicaoID);
+
             return View(departamento);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoID,Nome")] Departamento departamento)
+        public async Task<IActionResult> Edit(long? id, [Bind("DepartamentoID, Nome, InstituicaoID")] Departamento departamento)
         {
             if (id != departamento.DepartamentoID)
             {
@@ -92,9 +105,12 @@ namespace IES.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 
+            ViewBag.Instituicoes = new SelectList(_context.Instituicoes.OrderBy(b => b.Nome),
+                "InstituicaoID", "Nome", departamento.InstituicaoID);
             return View(departamento);
         }
 
@@ -105,7 +121,9 @@ namespace IES.Controllers
                 return BadRequest();
             }
 
-            var departamento = await _context.Departamentos.SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            var departamento = await _context.Departamentos.
+                SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            _context.Instituicoes.Where(i => departamento.InstituicaoID == i.InstituicaoID).Load();
 
             if (departamento == null)
             {
@@ -122,7 +140,9 @@ namespace IES.Controllers
                 return BadRequest();
             }
 
-            var departamento = await _context.Departamentos.SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            var departamento = await _context.Departamentos.
+                SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            _context.Instituicoes.Where(i => departamento.InstituicaoID == i.InstituicaoID).Load();
 
             if (departamento == null)
             {
@@ -136,7 +156,8 @@ namespace IES.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long? id)
         {
-            var departamento = await _context.Departamentos.SingleOrDefaultAsync(d => d.DepartamentoID == id);
+            var departamento = await _context.Departamentos.
+                SingleOrDefaultAsync(d => d.DepartamentoID == id);
             _context.Departamentos.Remove(departamento);
             TempData["Message"] = "Departamento " + departamento.Nome.ToUpper() + " foi removido";
             await _context.SaveChangesAsync();

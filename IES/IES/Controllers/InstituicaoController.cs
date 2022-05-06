@@ -105,7 +105,8 @@ namespace IES.Controllers
                 return BadRequest();
             }
 
-            var instituicao = await _context.Instituicoes.SingleOrDefaultAsync(d => d.InstituicaoID == id);
+            var instituicao = await _context.Instituicoes.Include(d => d.Departamentos).
+                SingleOrDefaultAsync(d => d.InstituicaoID == id);
 
             if (instituicao == null)
             {
