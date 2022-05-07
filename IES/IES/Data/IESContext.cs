@@ -1,4 +1,4 @@
-﻿using IES.Models;
+﻿using Modelo.Cadastros;
 using Microsoft.EntityFrameworkCore;
 
 namespace IES.Data
@@ -11,13 +11,6 @@ namespace IES.Data
         public IESContext(DbContextOptions<IESContext> options) : base(options)
         {
 
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Departamento>().ToTable("Departamento");
-            modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
         }
     }
 }

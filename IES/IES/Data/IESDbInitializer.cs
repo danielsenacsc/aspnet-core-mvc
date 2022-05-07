@@ -1,4 +1,4 @@
-﻿using IES.Models;
+﻿using Modelo.Cadastros;
 using System.Linq;
 
 namespace IES.Data
@@ -7,7 +7,7 @@ namespace IES.Data
     {
         public static void Initialize(IESContext context)
         {
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (context.Departamentos.Any())
