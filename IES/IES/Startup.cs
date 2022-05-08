@@ -53,6 +53,7 @@ namespace IES
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
