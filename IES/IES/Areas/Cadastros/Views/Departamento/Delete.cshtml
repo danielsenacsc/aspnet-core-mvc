@@ -9,11 +9,9 @@
     <div class="card-header text-white bg-secondary text-center h1">
         Exibindo uma departamento para remoção
     </div>
-    @{
-        await Html.PartialAsync("~/Views/Departamento/_PartialDetailsContentCard.cshtml", Model);
-    }
+    @await Html.PartialAsync("~/Areas/Cadastros/Views/Departamento/_PartialDetailsContentCard.cshtml", Model)
     <div class="card-footer bg-info text-center text-white">
-        <a asp-action="Index" class="btn btn-danger">
+        <a asp-action="Index" asp-area="Cadastros" class="btn btn-danger">
             Retornar à listagem de Departamentos
         </a>
         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalConfirmationDelete">

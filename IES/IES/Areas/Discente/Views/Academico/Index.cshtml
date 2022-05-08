@@ -49,9 +49,9 @@
                             @Html.DisplayFor(modelItem => item.Nascimento)
                         </td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.AcademicoID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.AcademicoID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.AcademicoID">Delete</a>
+                            <a asp-action="Edit" asp-area="Discente" asp-route-id="@item.AcademicoID">Edit</a> |
+                            <a asp-action="Details" asp-area="Discente" asp-route-id="@item.AcademicoID">Details</a> |
+                            <a asp-action="Delete" asp-area="Discente" asp-route-id="@item.AcademicoID">Delete</a>
                         </td>
                     </tr>
                 }
@@ -59,7 +59,7 @@
         </table>
     </div>
     <div class="card-footer bg-success text-center">
-        <a asp-action="Create" class="btn-success">
+        <a asp-action="Create" asp-area="Discente" class="btn-success">
             Criar um novo acadêmico
         </a>
     </div>

@@ -7,9 +7,9 @@
 }
 <div class="card-block">
     <div class="card-header text-white bg-secondary text-center h1">Exibindo um acadêmico existente</div>
-    @await Html.PartialAsync("~/Views/Academico/_PartialDetailsContentCard.cshtml", Model)
+    @await Html.PartialAsync("~/Areas/Discente/Views/Academico/_PartialDetailsContentCard.cshtml", Model)
     <div class="card-footer bg-info text-center text-white">
-        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model.AcademicoID">Alterar</a> |
-        <a asp-action="Index" class="btn btn-warning">Retornar à listagem de acadêmicos</a>
+        <a asp-action="Edit" asp-area="Discente" class="btn btn-warning" asp-route-id="@Model.AcademicoID">Alterar</a> |
+        <a asp-action="Index" asp-area="Discente" class="btn btn-warning">Retornar à listagem de acadêmicos</a>
     </div>
 </div>

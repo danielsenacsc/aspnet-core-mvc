@@ -1,12 +1,12 @@
-﻿@model Modelo.Cadastros.Departamento
+﻿@model Modelo.Cadastros.Instituicao
 @{
     Layout = "~/Views/Shared/_LayoutIES.cshtml";
 }
 <div class="card-block">
-    <div class="card-header text-white bg-secondary text-center h1">Alterando um departamento existente</div>
+    <div class="card-header text-white bg-secondary text-center h1">Alterando uma instituição existente</div>
     <div class="card-body">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="DepartamentoID" />
+            <input type="hidden" asp-for="InstituicaoID" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -14,13 +14,13 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="InstituicaoID" class="control-label"></label>
-                <select asp-for="InstituicaoID" class="form-control" asp-items=@ViewBag.Instituicoes>
-                </select>
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
             <div class="form-group text-center h3">
-                <input type="submit" value="Atualizar Departamento" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-warning">Retornar à listagem de departamentos</a>
+                <input type="submit" value="Atualizar Instituição" class="btn btn-primary" />
+                <a asp-action="Index" asp-area="Cadastros" class="btn btn-warning">Retornar à listagem de instituições</a>
             </div>
         </form>
     </div>

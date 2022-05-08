@@ -48,9 +48,9 @@
                             @Html.DisplayFor(modelItem => item.Endereco)
                         </td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.InstituicaoID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.InstituicaoID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.InstituicaoID">Delete</a>
+                            <a asp-action="Edit" asp-area="Cadastros" asp-route-id="@item.InstituicaoID">Edit</a> |
+                            <a asp-action="Details" asp-area="Cadastros" asp-route-id="@item.InstituicaoID">Details</a> |
+                            <a asp-action="Delete" asp-area="Cadastros" asp-route-id="@item.InstituicaoID">Delete</a>
                         </td>
                     </tr>
                 }
@@ -58,7 +58,7 @@
         </table>
     </div>
     <div class="card-footer bg-success text-center">
-        <a asp-action="Create" class="btn-success">Criar uma nova instituição</a>
+        <a asp-action="Create" asp-area="Cadastros" class="btn-success">Criar uma nova instituição</a>
     </div>
 </div>
 @section ScriptPage {

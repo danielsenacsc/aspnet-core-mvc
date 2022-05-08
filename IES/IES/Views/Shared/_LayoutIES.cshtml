@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<IES.Models.Infra.UsuarioDaAplicacao> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<IES.Models.Infra.UsuarioDaAplicacao> UserManager
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -27,18 +30,33 @@
             <div class="col-12">&nbsp;</div>
             <div class="col-12">&nbsp;</div>
         </div>
+        <div class="row" style="text-align:right;">
+            <div class="col-6"></div>
+            <div class="col-6">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div>Olá @UserManager.GetUserName(User), seja bem-vindo(a) / @Html.ActionLink("Logout", "Sair", "Infra", new { area = "" })</div>
+                }
+                else
+                {
+                    <a class="nav-item nav-link" asp-area="" asp-controller="Infra" asp-action="Acessar">
+                        Informar usuário/senha para acessar
+                    </a>
+                }
+            </div>
+        </div>
         <div class="row">
             <div class="col-2">
                 <nav class="nav flex-column bg-transparent">
-                    <a class="nav-link active" asp-controller="Instituicao" asp-action="Index">
+                    <a class="nav-link active" asp-area="Cadastros" asp-controller="Instituicao" asp-action="Index">
                         <img src="~/images/university.png" width="30" height="30" alt="">
                         Instituições
                     </a>
-                    <a class="nav-link" asp-controller="Departamento" asp-action="Index">
+                    <a class="nav-link" asp-area="Cadastros" asp-controller="Departamento" asp-action="Index">
                         <img src="~/images/department.png" width="30" height="30" alt="">
                         Departamentos
                     </a>
-                    <a class="nav-item nav-link" asp-controller="Academico" asp-action="Index">
+                    <a class="nav-item nav-link" asp-area="Discente" asp-controller="Academico" asp-action="Index">
                         <img src="~/images/academic.png" width="30" height="30" alt="">
                         Acadêmicos
                     </a>

@@ -3,13 +3,14 @@ using Modelo.Cadastros;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using IES.Data.DAL.Cadastros;
 
-namespace IES.Controllers
+namespace IES.Areas.Cadastros.Controllers
 {
+    [Area("Cadastros")]
+
     public class DepartamentoController : Controller
     {
         private readonly IESContext _context;
