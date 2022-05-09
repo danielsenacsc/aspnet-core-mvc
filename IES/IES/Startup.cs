@@ -30,6 +30,8 @@ namespace IES
 
             services.AddDbContext<IESContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("IESConnection")));
+            services.AddSession();
+            services.AddDistributedMemoryCache();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddIdentity<UsuarioDaAplicacao, IdentityRole>()
@@ -57,6 +59,7 @@ namespace IES
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
